@@ -3,10 +3,12 @@ Perfect Pixels
 
 Since you're on this page, you're probably looking for how to use this bookmarklet.
 
-Well, the answer is simple, just drag [this link]() to your bookmarks folder above.
+Well, the answer is simple, just make the code below into a bookmark.
 
 Once on a page you want to edit, click the bookmarklet and follow the instructions.
 
+
+(javascript:(function(){if(typeof PerfectPixel==="undefined"){var a=document.createElement("script");a.type="text/javascript";a.src="https://raw.github.com/shalecraig/Perfect-Pixels/master/bookmarklet-entire.js";document.body.appendChild(a)}else{runPerfectPixel()}})();)
 
 About Perfect Pixels:
 ---------------------
