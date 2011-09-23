@@ -1,4 +1,5 @@
-function runPlugin() {
+var PerfectPixel = true;
+function runPerfectPixel() {
 	var $ = jQuery,
 	noOp = function(){return false;},
 	holder = $('body'),
@@ -118,11 +119,11 @@ function getjQueryUI() {
 		// http://www.hunlock.com/blogs/Howto_Dynamically_Insert_Javascript_And_CSS
 		var jQui = document.createElement('script');
 		jQui.type = 'text/javascript';
-		jQui.onload = runPlugin;
+		jQui.onload = runPerfectPixel;
 		jQui.src = 'https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.js';
 		document.body.appendChild(jQui);
 	} else {
-		runPlugin();
+		runPerfectPixel();
 	}
 }
 
