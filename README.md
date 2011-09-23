@@ -1,17 +1,22 @@
 Perfect Pixels
 ==============
 
-Since you're on this page, you're probably looking for how to use this bookmarklet.
+What is it?
+-----------
 
-Well, the answer is simple, just make the code below into a bookmark.
+This bookmarklet allows you to overlay a web composition over top of your developed html.
 
-Once on a page you want to edit, click the bookmarklet and follow the instructions.
+Quick setup:
+------------
 
+Just make the code below into the target of a bookmark.
+
+Once on a page you want to firm up the design, click the bookmarklet and follow the instructions.
 
 javascript:(function(){if(typeof PerfectPixel==="undefined"){var a=document.createElement("script");a.type="text/javascript";a.src="https://raw.github.com/shalecraig/Perfect-Pixels/master/bookmarklet-entire.js";document.body.appendChild(a)}else{runPerfectPixel()}})();
 
-About Perfect Pixels:
----------------------
+Browser support:
+----------------
 
 Currently works on:
 Firefox 5+6
