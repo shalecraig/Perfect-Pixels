@@ -8,7 +8,33 @@ function runPerfectPixel() {
 	statusBox = $('<div id="drag_notifier_'+uniqueNum+'fixed;z-index:199;top:0px;left:0px;padding:30px 45px;overflow:hidden;margin:10px;font-size:14px;color:#333;border:1px solid #ccc;background-color:white;border-radius:10px;-moz-border-radius:10px;font-family:helvetica;">Drop picture here.</div>'),
 	image = $('<img id="droppedComp_'+uniqueNum+'absolute;left:100px; top:100px;z-index:100">'),
 	initDropFunction = holder[0].ondrop,
-	setToGo = true;
+	setToGo = true,
+	dropFunction,
+	gaTrack = function() {
+		function rand(min, max) {
+		 return min + Math.floor(Math.random() * (max - min));
+		}
+		
+		var i=1000000000,
+		 utmn=rand(i,9999999999), //random request number
+		 cookie=rand(10000000,99999999), //random cookie number
+		 random=rand(i,2147483647), //number under 2147483647
+		 today=(new Date()).getTime(),
+		 win = window.location,
+		 img = new Image(),
+		 urchinUrl = 'http://www.google-analytics.com/__utm.gif?utmwv=1.3&utmn='
+			+utmn+'&utmsr=-&utmsc=-&utmul=-&utmje=0&utmfl=-&utmdt=-&utmhn=www.shalecraig.com&utmr='+win+'&utmp=/bookmarklets/js&utmac=UA-11982805-1&utmcc=__utma%3D'
+			+cookie+'.'+random+'.'+today+'.'+today+'.'
+			+today+'.2%3B%2B__utmb%3D'
+			+cookie+'%3B%2B__utmc%3D'
+			+cookie+'%3B%2B__utmz%3D'
+			+cookie+'.'+today
+			+'.2.2.utmccn%3D(referral)%7Cutmcsr%3D' + win.host + '%7Cutmcct%3D' + win.pathname + '%7Cutmcmd%3Dreferral%3B%2B__utmv%3D'
+			+cookie+'.-%3B';
+		
+		// trigger the tracking
+		img.src = urchinUrl;
+	};
 
 	if (typeof window.FileReader === 'undefined') {
 		alert("File API & FileReader unavailable. Please try a better browser?");
@@ -26,16 +52,14 @@ function runPerfectPixel() {
 	$('body').append(statusBox);
 	statusBox.fadeIn();
 
-	var dropFunction = function (e) {
+	dropFunction = function (e) {
 		e.preventDefault();
 		var imgOpacity = 0.5,
 		file = e.dataTransfer.files[0],
 		reader = new FileReader();
 
 		window.onbeforeunload = function (){return "Are you sure you want to leave?";};
-		a = statusBox, b = statusBox.text('');
-		console.log(statusBox, statusBox.text(''));
-		statusBox.text('Drag, or use your arrow keys to move the image.')
+		statusBox.text('Drag, or use your arrow keys to move the image.');
 		setTimeout(function() {
 			statusBox.fadeOut('slow');
 		}, 5000);
