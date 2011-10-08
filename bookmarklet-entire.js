@@ -39,7 +39,7 @@ function runPerfectPixel() {
 	if (typeof window.FileReader === 'undefined') {
 		alert('File API & FileReader unavailable. Please try a better browser?');
 		setToGo = false;
-	} else if (location.protocol === 'ftp://' && navigator.userAgent.toLowerCase().indexOf('chrome') > -1) {
+	} else if (location.protocol === 'file:' && navigator.userAgent.toLowerCase().indexOf('chrome') > -1) {
 		statusBox.html('It seems like you\'re hosting the page via file://. <br/>' +
 					'Due to chrome security bug <a href=\"http://code.google.com/p/chromium/issues/detail?id=47416\">#47416</a>, files cannot be read locally.<br/>' +
 					'Try hosting it locally via http://');
