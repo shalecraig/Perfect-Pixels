@@ -123,7 +123,7 @@ function runPerfectPixel() {
 // Snippet found here...
 // http://coding.smashingmagazine.com/2010/05/23/make-your-own-bookmarklets-with-jquery/
 function getjQueryUI() {
-	if (typeof jQuery.ui === 'undefined') {
+	if (typeof jQuery.ui === 'undefined' || jQuery.ui.draggable === 'undefined') {
 		// http://www.hunlock.com/blogs/Howto_Dynamically_Insert_Javascript_And_CSS
 		var jQui = document.createElement('script');
 		jQui.type = 'text/javascript';
