@@ -4,9 +4,9 @@ function runPerfectPixel() {
 	noOp = function(){return false;},
 	holder = $('body'),
 	bul = window.onbeforeunload,
-	uniqueNum = new Date().getTime() + '" style="position: ',
-	statusBox = $('<div id="drag_notifier_'+uniqueNum+'fixed;z-index:199;top:0px;left:0px;padding:30px 45px;overflow:hidden;margin:10px;font-size:14px;color:#333;border:1px solid #ccc;background-color:white;border-radius:10px;-moz-border-radius:10px;font-family:helvetica;">Drop picture here.</div>'),
-	image = $('<img id="droppedComp_'+uniqueNum+'absolute;left:100px; top:100px;z-index:100">'),
+	uniqueNum = new Date().getTime(),
+	statusBox = $('<div id=\"drag_notifier_'+uniqueNum+'\" style=\'position: fixed;z-index:199;top:0px;left:0px;padding:30px 45px;overflow:hidden;margin:10px;font-size:14px;color:#333;border:1px solid #ccc;background-color:white;border-radius:10px;-moz-border-radius:10px;font-family:helvetica;\'>Drop picture here.</div>'),
+	image = $('<img id=\"droppedComp_'+uniqueNum+'\" style=\'position:absolute;left:100px; top:100px;z-index:100\'>'),
 	initDropFunction = holder[0].ondrop,
 	setToGo = true,
 	dropFunction,
@@ -37,12 +37,12 @@ function runPerfectPixel() {
 	};
 
 	if (typeof window.FileReader === 'undefined') {
-		alert("File API & FileReader unavailable. Please try a better browser?");
+		alert('File API & FileReader unavailable. Please try a better browser?');
 		setToGo = false;
 	} else if (location.protocol === 'ftp://' && navigator.userAgent.toLowerCase().indexOf('chrome') > -1) {
-		statusBox.html("It seems like you're hosting the page via file://. <br/>" +
-					"Due to chrome security bug <a href=\"http://code.google.com/p/chromium/issues/detail?id=47416\">#47416</a>, files cannot be read locally.<br/>" +
-					"Try hosting it locally via http://");
+		statusBox.html('It seems like you\'re hosting the page via file://. <br/>' +
+					'Due to chrome security bug <a href=\"http://code.google.com/p/chromium/issues/detail?id=47416\">#47416</a>, files cannot be read locally.<br/>' +
+					'Try hosting it locally via http://');
 		setToGo = false;
 	}
 
@@ -58,7 +58,7 @@ function runPerfectPixel() {
 		file = e.dataTransfer.files[0],
 		reader = new FileReader();
 
-		window.onbeforeunload = function (){return "Are you sure you want to leave?";};
+		window.onbeforeunload = function (){return 'Are you sure you want to leave?';};
 		statusBox.text('Drag, or use your arrow keys to move the image.');
 		setTimeout(function() {
 			statusBox.fadeOut('slow');
@@ -73,7 +73,7 @@ function runPerfectPixel() {
 		};
 
 		reader.onerror = function(stuff) {
-			alert("error reading file");
+			alert('error reading file');
 			console.log(stuff);
 		};
 		reader.readAsDataURL(file);
