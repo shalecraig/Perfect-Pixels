@@ -7,10 +7,17 @@ function runPerfectPixel() {
 	uniqueNum = new Date().getTime() + '" style="position: ',
 	statusBox = $('<div id="drag_notifier_'+uniqueNum+'fixed;z-index:199;top:0px;left:0px;padding:30px 45px;overflow:hidden;margin:10px;font-size:14px;color:#333;border:1px solid #ccc;background-color:white;border-radius:10px;-moz-border-radius:10px;font-family:helvetica;">Drop picture here.</div>'),
 	image = $('<img id="droppedComp_'+uniqueNum+'absolute;left:100px; top:100px;z-index:100">'),
-	initDropFunction = holder[0].ondrop;
+	initDropFunction = holder[0].ondrop,
+	setToGo = true;
 
 	if (typeof window.FileReader === 'undefined') {
 		alert("File API & FileReader unavailable. Please try a better browser?");
+		setToGo = false;
+	} else if (location.protocol === 'ftp://' && navigator.userAgent.toLowerCase().indexOf('chrome') > -1) {
+		statusBox.html("It seems like you're hosting the page via file://. <br/>" +
+					"Due to chrome security bug <a href=\"http://code.google.com/p/chromium/issues/detail?id=47416\">#47416</a>, files cannot be read locally.<br/>" +
+					"Try hosting it locally via http://");
+		setToGo = false;
 	}
 
 	$('html').css('overflow-y', 'scroll');
@@ -43,7 +50,7 @@ function runPerfectPixel() {
 
 		reader.onerror = function(stuff) {
 			alert("error reading file");
-			alert(stuff);
+			console.log(stuff);
 		};
 		reader.readAsDataURL(file);
 
@@ -106,10 +113,11 @@ function runPerfectPixel() {
 		statusBox.remove();
 	});
 	
-	holder[0].ondragover = noOp;
-	holder[0].ondragend = noOp;
-	holder[0].ondrop = dropFunction;
-
+	if (setToGo) {
+		holder[0].ondragover = noOp;
+		holder[0].ondragend = noOp;
+		holder[0].ondrop = dropFunction;
+	}
 }
 
 // Snippet found here...
