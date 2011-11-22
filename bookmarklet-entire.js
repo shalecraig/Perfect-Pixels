@@ -5,7 +5,7 @@ function runPerfectPixel() {
 	holder = $('body'),
 	bul = window.onbeforeunload,
 	uniqueNum = new Date().getTime(),
-	statusBox = $('<div id=\"drag_notifier_'+uniqueNum+'\" style=\'position: fixed;z-index:199;top:0px;left:0px;padding:30px 45px;overflow:hidden;margin:10px;font-size:14px;color:#333;border:1px solid #ccc;background-color:white;border-radius:10px;-moz-border-radius:10px;font-family:helvetica;\'>Drop picture here.</div>'),
+	statusBox = $('<div id=\"drag_notifier_'+uniqueNum+'\" style=\'position: fixed;z-index:9999;top:0px;left:0px;padding:30px 45px;overflow:hidden;margin:10px;font-size:14px;color:#333;border:1px solid #ccc;background-color:white;border-radius:10px;-moz-border-radius:10px;font-family:helvetica;\'>Drop picture here.</div>'),
 	image = $('<img id=\"droppedComp_'+uniqueNum+'\" style=\'position:absolute;left:100px; top:100px;z-index:100; pointer-events:none;\'>'),
 	initDropFunction = holder[0].ondrop,
 	setToGo = true,
@@ -59,7 +59,7 @@ function runPerfectPixel() {
 		reader = new FileReader();
 
 		window.onbeforeunload = function (){return 'Are you sure you want to leave?';};
-		statusBox.text('Drag, or use your arrow keys to move the image.');
+		statusBox.text('Drag, or use your arrow keys to move the image. Hold shift to modify default functions.');
 		setTimeout(function() {
 			statusBox.fadeOut('slow');
 		}, 5000);
@@ -68,7 +68,22 @@ function runPerfectPixel() {
 		reader.onload = function (event) {
 			var imageURL = (typeof event.target.result !== 'undefined') ? event.target.result : event.target.baseURI;
 			image.attr('src',imageURL);
-			image.css({ opacity: imgOpacity }).draggable();
+			image.css({ opacity: imgOpacity }).draggable({
+				scroll: false,
+				start: function(event) {
+					if (event.shiftKey) {
+						this.css("pointer-events","none");
+						return false;
+					} else {
+						return true;
+					}
+				},
+				end: function(event) {
+					this.css("pointer-events","default");
+				}
+			}
+				
+				);
 			$(document.body).append(image);
 		};
 
