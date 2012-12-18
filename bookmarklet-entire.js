@@ -1,3 +1,9 @@
+/* This program is free software. It comes without any warranty, to
+ * the extent permitted by applicable law. You can redistribute it
+ * and/or modify it under the terms of the Do What The Fuck You Want
+ * To Public License, Version 2, as published by Sam Hocevar. See
+ * http://sam.zoy.org/wtfpl/COPYING for more details. */
+
 var PerfectPixel = true;
 function runPerfectPixel() {
 	var $ = jQuery,
@@ -14,7 +20,7 @@ function runPerfectPixel() {
 		function rand(min, max) {
 		 return min + Math.floor(Math.random() * (max - min));
 		}
-		
+
 		var i=1000000000,
 		 utmn=rand(i,9999999999), //random request number
 		 cookie=rand(10000000,99999999), //random cookie number
@@ -31,7 +37,7 @@ function runPerfectPixel() {
 			+cookie+'.'+today
 			+'.2.2.utmccn%3D(referral)%7Cutmcsr%3D' + win.host + '%7Cutmcct%3D' + win.pathname + '%7Cutmcmd%3Dreferral%3B%2B__utmv%3D'
 			+cookie+'.-%3B';
-		
+
 		// trigger the tracking
 		img.src = urchinUrl;
 	};
@@ -82,7 +88,7 @@ function runPerfectPixel() {
 					this.css("pointer-events","default");
 				}
 			}
-				
+
 				);
 			$(document.body).append(image);
 		};
@@ -151,7 +157,7 @@ function runPerfectPixel() {
 		holder[0].ondrop = initDropFunction;
 		statusBox.remove();
 	});
-	
+
 	if (setToGo) {
 		holder[0].ondragover = noOp;
 		holder[0].ondragend = noOp;
