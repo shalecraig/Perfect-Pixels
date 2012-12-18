@@ -43,6 +43,9 @@ function runPerfectPixel() {
 		img.src = urchinUrl;
 	};
 
+	// We have analytics, we may as well use it.
+	gaTrack();
+
 	if (typeof window.FileReader === 'undefined') {
 		alert('File API & FileReader unavailable. Please try a better browser?');
 		setToGo = false;
