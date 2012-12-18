@@ -5,6 +5,7 @@
  * http://sam.zoy.org/wtfpl/COPYING for more details. */
 
 var PerfectPixel = true;
+(function() {
 function runPerfectPixel() {
 	var $ = jQuery,
 	noOp = function(){return false;},
@@ -180,7 +181,6 @@ function getjQueryUI() {
 	}
 }
 
-(function () {
 	if (typeof jQuery === 'undefined') {
 		// http://www.hunlock.com/blogs/Howto_Dynamically_Insert_Javascript_And_CSS
 		var jQ = document.createElement('script');
