@@ -8,12 +8,12 @@ var PerfectPixel = true;
 (function() {
 function runPerfectPixel() {
 	var $ = jQuery,
-	noOp = function(){return false;},
+	noOp = function() {return false;};,
 	holder = $('body'),
 	bul = window.onbeforeunload,
 	uniqueNum = new Date().getTime(),
-	statusBox = $('<div id=\"drag_notifier_'+uniqueNum+'\" style=\'position: fixed;z-index:9999;top:0px;left:0px;padding:30px 45px;overflow:hidden;margin:10px;font-size:14px;color:#333;border:1px solid #ccc;background-color:white;border-radius:10px;-moz-border-radius:10px;font-family:helvetica;\'>Drop picture here.</div>'),
-	image = $('<img id=\"droppedComp_'+uniqueNum+'\" style=\'position:absolute;left:100px; top:100px;z-index:100;\'>'),
+	statusBox = $('<div id=\"drag_notifier_' + uniqueNum + '\" style=\'position: fixed;z-index:9999;top:0px;left:0px;padding:30px 45px;overflow:hidden;margin:10px;font-size:14px;color:#333;border:1px solid #ccc;background-color:white;border-radius:10px;-moz-border-radius:10px;font-family:helvetica;\'>Drop picture here.</div>'),
+	image = $('<img id=\"droppedComp_' + uniqueNum + '\" style=\'position:absolute;left:100px; top:100px;z-index:100;\'>'),
 	initDropFunction = holder[0].ondrop,
 	setToGo = true,
 	dropFunction,
@@ -22,22 +22,22 @@ function runPerfectPixel() {
 		 return min + Math.floor(Math.random() * (max - min));
 		}
 
-		var i=1000000000,
-		 utmn=rand(i,9999999999), //random request number
-		 cookie=rand(10000000,99999999), //random cookie number
-		 random=rand(i,2147483647), //number under 2147483647
-		 today=(new Date()).getTime(),
+		var i = 1000000000,
+		 utmn = rand(i, 9999999999), //random request number
+		 cookie = rand(10000000, 99999999), //random cookie number
+		 random = rand(i, 2147483647), //number under 2147483647
+		 today = (new Date()).getTime(),
 		 win = window.location,
 		 img = new Image(),
 		 urchinUrl = 'http://www.google-analytics.com/__utm.gif?utmwv=1.3&utmn='
-			+utmn+'&utmsr=-&utmsc=-&utmul=-&utmje=0&utmfl=-&utmdt=-&utmhn=www.shalecraig.com&utmr='+win+'&utmp=/bookmarklets/js&utmac=UA-11982805-1&utmcc=__utma%3D'
-			+cookie+'.'+random+'.'+today+'.'+today+'.'
-			+today+'.2%3B%2B__utmb%3D'
-			+cookie+'%3B%2B__utmc%3D'
-			+cookie+'%3B%2B__utmz%3D'
-			+cookie+'.'+today
-			+'.2.2.utmccn%3D(referral)%7Cutmcsr%3D' + win.host + '%7Cutmcct%3D' + win.pathname + '%7Cutmcmd%3Dreferral%3B%2B__utmv%3D'
-			+cookie+'.-%3B';
+			+ utmn + '&utmsr=-&utmsc=-&utmul=-&utmje=0&utmfl=-&utmdt=-&utmhn=www.shalecraig.com&utmr=' + win + '&utmp=/bookmarklets/js&utmac=UA-11982805-1&utmcc=__utma%3D'
+			+ cookie + '.' + random + '.' + today + '.' + today + '.'
+			+ today + '.2%3B%2B__utmb%3D'
+			+ cookie + '%3B%2B__utmc%3D'
+			+ cookie + '%3B%2B__utmz%3D'
+			+ cookie + '.' + today
+			+ '.2.2.utmccn%3D(referral)%7Cutmcsr%3D' + win.host + '%7Cutmcct%3D' + win.pathname + '%7Cutmcmd%3Dreferral%3B%2B__utmv%3D'
+			+ cookie + '.-%3B';
 
 		// trigger the tracking
 		img.src = urchinUrl;
@@ -59,34 +59,34 @@ function runPerfectPixel() {
 	$('body').append(statusBox);
 	statusBox.fadeIn();
 
-	dropFunction = function (e) {
+	dropFunction = function(e) {
 		e.preventDefault();
 		var imgOpacity = 0.5,
 		file = e.dataTransfer.files[0],
 		reader = new FileReader();
 
-		window.onbeforeunload = function (){return 'Are you sure you want to leave?';};
+		window.onbeforeunload = function() {return 'Are you sure you want to leave?';};
 		statusBox.text('Drag, or use your arrow keys to move the image. Hold shift to modify default functions.');
 		setTimeout(function() {
 			statusBox.fadeOut('slow');
 		}, 5000);
-		window.scrollTo(0,0);
+		window.scrollTo(0, 0);
 
-		reader.onload = function (event) {
+		reader.onload = function(event) {
 			var imageURL = (typeof event.target.result !== 'undefined') ? event.target.result : event.target.baseURI;
-			image.attr('src',imageURL);
+			image.attr('src', imageURL);
 			image.css({ opacity: imgOpacity }).draggable({
 				scroll: false,
 				start: function(event) {
 					if (event.shiftKey) {
-						this.css("pointer-events","none");
+						this.css('pointer-events', 'none');
 						return false;
 					} else {
 						return true;
 					}
 				},
 				end: function(event) {
-					this.css("pointer-events","default");
+					this.css('pointer-events', 'default');
 				}
 			}
 
@@ -100,7 +100,7 @@ function runPerfectPixel() {
 		};
 		reader.readAsDataURL(file);
 
-		$(document).keydown(function (e) {
+		$(document).keydown(function(e) {
 			var shift = e.shiftKey,
 			code = e.keyCode;
 			if (shift === true) {
@@ -139,7 +139,7 @@ function runPerfectPixel() {
 					case 27:
 						//leave edit mode
 						e.preventDefault();
-						image.fadeOut('200',function() {
+						image.fadeOut('200', function() {
 							image.remove();
 							statusBox.remove();
 							window.onbeforeunload = bul;
