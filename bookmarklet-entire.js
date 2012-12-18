@@ -8,7 +8,7 @@ var PerfectPixel = true;
 (function() {
 function runPerfectPixel() {
 	var $ = jQuery,
-	noOp = function() {return false;};,
+	noOp = function() {return false;},
 	holder = $('body'),
 	bul = window.onbeforeunload,
 	uniqueNum = new Date().getTime(),
@@ -168,27 +168,31 @@ function runPerfectPixel() {
 
 // Snippet found here...
 // http://coding.smashingmagazine.com/2010/05/23/make-your-own-bookmarklets-with-jquery/
-function getjQueryUI() {
-	if (typeof jQuery.ui === 'undefined' || jQuery.ui.draggable === 'undefined') {
-		// http://www.hunlock.com/blogs/Howto_Dynamically_Insert_Javascript_And_CSS
-		var jQui = document.createElement('script');
-		jQui.type = 'text/javascript';
-		jQui.onload = runPerfectPixel;
-		jQui.src = 'https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.js';
-		document.body.appendChild(jQui);
-	} else {
-		runPerfectPixel();
+	var deferredWaiting = 0;
+	function go() {
+		deferredWaiting--;
+		if (deferredWaiting <= 0) {
+			runPerfectPixel();
+			deferredWaiting = 0;
+		}
 	}
-}
 
+	function load(url) {
+		var script = document.createElement('script');
+		script.type = 'text/javascript';
+		deferredWaiting++;
+		script.onload = go;
+		script.src = url;
+		document.body.appendChild(script);
+	}
 	if (typeof jQuery === 'undefined') {
 		// http://www.hunlock.com/blogs/Howto_Dynamically_Insert_Javascript_And_CSS
-		var jQ = document.createElement('script');
-		jQ.type = 'text/javascript';
-		jQ.onload = getjQueryUI;
-		jQ.src = 'http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js';
-		document.body.appendChild(jQ);
-	} else {
-		getjQueryUI();
+		load('http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js');
+	}
+	if (typeof jQuery === 'undefined' || typeof jQuery.ui === 'undefined' || jQuery.ui.draggable === 'undefined') {
+		load('https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.js');
+	}
+	if (deferredWaiting === 0) {
+		go();
 	}
 })();
