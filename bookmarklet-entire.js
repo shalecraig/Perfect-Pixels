@@ -88,7 +88,7 @@ function runPerfectPixel() {
 						return true;
 					}
 				},
-				end: function(event) {
+				end: function() {
 					this.css('pointer-events', 'default');
 				}
 			}
